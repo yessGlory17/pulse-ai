@@ -1,7 +1,7 @@
 import { tool } from "ai";
 import { getSession } from "next-auth/react";
 import { z } from "zod";
-import { cookies } from "next/headers";
+import { cookies, headers } from "next/headers";
 
 export const getProcessListByID = tool({
   description:
@@ -25,11 +25,15 @@ export const getProcessListByID = tool({
   execute: async ({ id, limit, sort_by, order }) => {
     console.log("GET PROCESS BY ID TOOLU CALISTI: ", id);
     // const session = await getSession();
+    const header = await headers();
+    const host = header.get("x-forwarded-host") || header.get("host");
+    const protocol = header.get("x-forwarded-proto") || "https";
+
     const cookieStore = await cookies();
     const sessionToken = cookieStore.get("next-auth.session-token")?.value;
 
     const response = await fetch(
-      `http://localhost:3000/api/endpoint/${id}/command`,
+      `http://${host}:${protocol}/api/endpoint/${id}/command`,
       {
         method: "POST",
         body: JSON.stringify({
