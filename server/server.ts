@@ -4,10 +4,10 @@ import next from 'next';
 import { initIO } from './lib/socket';
 
 const dev = process.env.NODE_ENV !== 'production';
-const hostname = 'localhost';
+// const hostname = 'localhost';
 const port = 3000;
 
-const app = next({ dev, hostname, port });
+const app = next({ dev, port });
 const handle = app.getRequestHandler();
 
 const httpServer = createServer(handle);
@@ -33,6 +33,6 @@ app.prepare().then(() => {
   });
 
   httpServer.listen(port, () => {
-    console.log(`> Sunucu http://${hostname}:${port} adresinde çalışıyor`);
+    console.log(`> Sunucu ${port} adresinde çalışıyor`);
   });
 });

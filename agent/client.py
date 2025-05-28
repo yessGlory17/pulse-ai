@@ -88,5 +88,5 @@ def tool_call(data):
 
 
 
-sio.connect("http://localhost:3000", socketio_path="/api/socketio")
+sio.connect("https://pulse-ai-sooty.vercel.app:3000", socketio_path="/api/socketio")
 sio.wait()
