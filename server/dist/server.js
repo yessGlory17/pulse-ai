@@ -8,9 +8,9 @@ const http_1 = require("http");
 const next_1 = __importDefault(require("next"));
 const socket_1 = require("./lib/socket");
 const dev = process.env.NODE_ENV !== 'production';
-const hostname = 'localhost';
+// const hostname = 'localhost';
 const port = 3000;
-const app = (0, next_1.default)({ dev, hostname, port });
+const app = (0, next_1.default)({ dev, port });
 const handle = app.getRequestHandler();
 const httpServer = (0, http_1.createServer)(handle);
 const io = (0, socket_1.initIO)(httpServer);
@@ -28,6 +28,6 @@ app.prepare().then(() => {
         });
     });
     httpServer.listen(port, () => {
-        console.log(`> Sunucu http://${hostname}:${port} adresinde çalışıyor`);
+        console.log(`> Sunucu ${port} adresinde çalışıyor`);
     });
 });
