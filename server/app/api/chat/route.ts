@@ -1,7 +1,7 @@
 import { createGoogleGenerativeAI } from "@ai-sdk/google";
 import { streamText, generateText, CoreMessage } from "ai";
+import { getEndpoints } from "~/tools/endpoints";
 import {  getProcessListByID } from "~/tools/process";
-// import { getProcessList } from "../../tools/process";
 
 // Allow streaming responses up to 30 seconds
 export const maxDuration = 30;
@@ -14,6 +14,7 @@ Sen, bir sistem analisti AI ajanısın. Görevin, kullanıcıdan gelen doğal di
 
 2. **Araç Kullanımı**: Aşağıdaki sistem API araçlarını kullanarak işlemleri gerçekleştir:
    - getProcessListByID: Sistem üzerindeki tüm süreçlerin listesini alır.
+   - getEndpoints: Sisteme kayitli tum endpointleri (bilgisayarlari) listeler.
    - find_process: Belirli bir süreci bulur.
    - kill_process: Belirli bir süreci sonlandırır.
 
@@ -49,6 +50,7 @@ export async function POST(req: Request) {
     messages,
     tools: {
       getProcessListByID,
+      getEndpoints
     },
     maxSteps: 5,
   })

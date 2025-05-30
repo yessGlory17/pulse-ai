@@ -35,14 +35,14 @@ def collect_processes(limit=5, sort_by='cpu', order='desc'):
 
     return processes[:limit]
 
-def getClientID():
+def getConfig():
     with open(CONFIG_FILE, "r", encoding="utf-8") as dosya:
         conf = json.load(dosya)
         print("ENDPOINT ID: ", conf["MY_REGISTERED_ID"])
-        return conf["MY_REGISTERED_ID"]
+        return conf
 
 
-ENDPOINT_ID = getClientID()
+CONFIG = getConfig()
 
 sio = socketio.Client()
 
@@ -50,7 +50,7 @@ sio = socketio.Client()
 @sio.event
 def connect():
     print("Sunucuya bağlandı")
-    sio.emit("join-room", ENDPOINT_ID)  # Örnek oda ID'si
+    sio.emit("join-room", CONFIG["MY_REGISTERED_ID"])  # Örnek oda ID'si
 
 
 @sio.event
@@ -87,6 +87,5 @@ def tool_call(data):
         return { "process": "" }
 
 
-
-sio.connect("https://pulse-ai-sooty.vercel.app:3000", socketio_path="/api/socketio")
+sio.connect(CONFIG["TARGET"], socketio_path="/api/socketio")
 sio.wait()

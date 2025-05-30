@@ -32,7 +32,7 @@ export default function Home() {
 
       <p>TOKEN: {tokenMutation.data?.token}</p>
 
-      <h6>Endpoints</h6>
+      {/* <h6>Endpoints</h6>
       <div style={{ display: "flex", flexDirection: "column" }}>
         {endpoints?.data.map((endpoint) => {
           return (
@@ -45,7 +45,7 @@ export default function Home() {
             </div>
           );
         })}
-      </div>
+      </div> */}
 
       <hr />
 

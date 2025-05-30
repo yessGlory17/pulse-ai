@@ -30,6 +30,7 @@ export async function POST(
         //command => tool | 'collect_processes', 'find_process', 'collect_network' vs...
 
         let io = global.io;
+        console.log("GLOBAL IO: ", {isHave: !!io})
         try {
           const command_response = await new Promise((resolve, reject) => {
             io.timeout(5000)

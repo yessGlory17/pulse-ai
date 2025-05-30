@@ -31,9 +31,9 @@ export const getProcessListByID = tool({
 
     const cookieStore = await cookies();
     const sessionToken = cookieStore.get("next-auth.session-token")?.value;
-
+    console.log("TOOL TARGET: ", `${protocol}://${host}/api/endpoint/${id}/command`)
     const response = await fetch(
-      `http://${host}:${protocol}/api/endpoint/${id}/command`,
+      `${protocol}://${host}/api/endpoint/${id}/command`,
       {
         method: "POST",
         body: JSON.stringify({
@@ -41,7 +41,6 @@ export const getProcessListByID = tool({
           limit,
           sort_by,
           order,
-          //   user_id: session?.user.id,
         }),
         headers: {
           "Content-Type": "application/json",

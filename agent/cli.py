@@ -91,6 +91,7 @@ def main():
         # Yapılandırma dosyasını yükle ve güncelle
         config = load_config()
         config["MY_REGISTERED_ID"] = returned_id
+        config["TARGET"] = target_url
         save_config(config)
     else:
         parser.print_help()
